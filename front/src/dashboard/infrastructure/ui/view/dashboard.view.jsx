@@ -12,6 +12,7 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { MetricsRepository } from "../../../domain/metric/metric.repository";
 import { TwoPanelLayout } from "../components/layout/mainLayout/twoPanelLayout.component";
+import { dateRepository } from "../../../domain/metric/objectValues/date/date.service";
 
 const Form = ({ onSubmit }) => {
   const { handleSubmit, control } = useForm({
@@ -65,7 +66,7 @@ const MetricsTimeline = ({ data = [] }) => {
       {data.map((metric, i, array) => (
         <TimelineItem key={metric.id}>
           <TimelineOppositeContent color="text.secondary">
-            {metric.timestamp}
+            {dateRepository.getFormatedDataFromTimestamp(metric.timestamp)}
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot />

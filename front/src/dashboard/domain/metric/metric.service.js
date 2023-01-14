@@ -1,3 +1,4 @@
+import { dateRepository } from "./objectValues/date/date.service";
 import { generateUuidRepository } from "./objectValues/uuid/uuid.service";
 
 export const ServiceMetric = {
@@ -5,7 +6,7 @@ export const ServiceMetric = {
     return {
       name,
       value,
-      timestamp: Date.now(),
+      timestamp: dateRepository.timestamp(),
       id: generateUuidRepository.generateUid(),
     };
   },
