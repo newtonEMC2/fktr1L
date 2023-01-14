@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Header } from "../../header/appHeader/appHeader.component";
 import { AppFooter } from "../../footer/appFooter.component";
+import { f_px1 } from "../../../../../../shared/infrastructure/ui/styles/gutter";
 
 export const MainLayout = ({ children }) => {
   return (
@@ -22,7 +23,7 @@ export const MainLayout = ({ children }) => {
       <Box sx={{ gridArea: "header" }}>
         <Header></Header>
       </Box>
-      <Box sx={{ gridArea: "content" }}>content</Box>
+      <Box sx={{ gridArea: "content", px: f_px1 }}>content</Box>
       <Box sx={{ gridArea: "footer" }}>
         <AppFooter></AppFooter>
       </Box>
