@@ -13,16 +13,14 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { MetricsRepository } from "../../../domain/metric/metric.repository";
 import { TwoPanelLayout } from "../components/layout/mainLayout/twoPanelLayout.component";
 
-const Form = () => {
+const Form = ({ onSubmit }) => {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       name: "",
       value: "",
     },
   });
-  const onSubmit = (data) => {
-    MetricsRepository.saveMetric({ data });
-  };
+
   return (
     <form style={{ color: "blue" }} onSubmit={handleSubmit(onSubmit)}>
       <Box
@@ -62,7 +60,6 @@ const Form = () => {
 };
 
 const MetricsTimeline = ({ data = [] }) => {
-  console.log(data);
   return (
     <Timeline>
       {data.map((metric, i, array) => (
@@ -83,6 +80,15 @@ const MetricsTimeline = ({ data = [] }) => {
 
 export const DashboardView = () => {
   const [metrics, setMetrics] = useState([]);
+
+  const handleSubmit = (data) => {
+    MetricsRepository.saveMetric({ data })
+      .then((metric) =>
+        setMetrics((previousValue) => [...previousValue, metric])
+      )
+      .catch();
+  };
+
   useEffect(() => {
     MetricsRepository.fetchMetrics().then((metrics) =>
       setMetrics(metrics || [])
@@ -92,7 +98,7 @@ export const DashboardView = () => {
   return (
     <MainLayout>
       <TwoPanelLayout
-        leftContent={<Form></Form>}
+        leftContent={<Form onSubmit={handleSubmit}></Form>}
         rightContent={<MetricsTimeline data={metrics}></MetricsTimeline>}
       ></TwoPanelLayout>
     </MainLayout>

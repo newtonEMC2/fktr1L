@@ -11,7 +11,9 @@ export const MetricsRepositoryImplementation = {
     return post({
       url: `http://localhost:3001/metrics`,
       data: JSON.stringify(metricsDTO.toExternalInstance(metricDomainInstance)),
-    }).catch();
+    })
+      .then(() => metricDomainInstance)
+      .catch();
   },
 
   fetchMetrics: () => {
