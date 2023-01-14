@@ -1,4 +1,14 @@
-const post = async ({ url, data }) => {
+export const get = async ({ url }) => {
+  try {
+    return await fetch(url, {
+      method: "GET",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const post = async ({ url, data }) => {
   try {
     return await fetch(url, {
       method: "POST",
@@ -11,5 +21,3 @@ const post = async ({ url, data }) => {
     console.log(error);
   }
 };
-
-export { post };

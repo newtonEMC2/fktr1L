@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../components/layout/mainLayout/mainLayout.component";
-
 import { useForm, Controller } from "react-hook-form";
 import { Box } from "@mui/system";
 import { Button, TextField } from "@mui/material";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { MetricsRepository } from "../../../domain/metric/metric.repository";
+import { TwoPanelLayout } from "../components/layout/mainLayout/twoPanelLayout.component";
 
 const Form = () => {
   const { handleSubmit, control } = useForm({
@@ -54,10 +61,40 @@ const Form = () => {
   );
 };
 
+const MetricsTimeline = ({ data = [] }) => {
+  console.log(data);
+  return (
+    <Timeline>
+      {data.map((metric, i, array) => (
+        <TimelineItem key={metric.id}>
+          <TimelineOppositeContent color="text.secondary">
+            {metric.timestamp}
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot />
+            {i <= array.length - 2 && <TimelineConnector />}
+          </TimelineSeparator>
+          <TimelineContent>{metric.value}</TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
+  );
+};
+
 export const DashboardView = () => {
+  const [metrics, setMetrics] = useState([]);
+  useEffect(() => {
+    MetricsRepository.fetchMetrics().then((metrics) =>
+      setMetrics(metrics || [])
+    );
+  }, []);
+
   return (
     <MainLayout>
-      <Form></Form>
+      <TwoPanelLayout
+        leftContent={<Form></Form>}
+        rightContent={<MetricsTimeline data={metrics}></MetricsTimeline>}
+      ></TwoPanelLayout>
     </MainLayout>
   );
 };

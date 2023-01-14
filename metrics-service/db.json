@@ -1,10 +1,16 @@
 {
   "metrics": [
     {
-      "id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b300001",
-      "timestamp": "",
-      "name": "",
-      "value": ""
+      "id": "0f8ea137-f89a-4d48-9b56-47949943a5b6",
+      "name": "hoa",
+      "value": "bar",
+      "timestamp": 1673701113938
+    },
+    {
+      "id": "4a685095-f02c-4127-8e64-5f6f928fb7ab",
+      "name": "uu",
+      "value": "ii",
+      "timestamp": 1673708333442
     }
   ]
 }

@@ -3,4 +3,5 @@ import { MetricsRepositoryImplementation } from "../../infrastructure/http/repos
 export const MetricsRepository = {
   saveMetric: ({ data }) =>
     MetricsRepositoryImplementation.saveMetric({ data }),
+  fetchMetrics: () => MetricsRepositoryImplementation.fetchMetrics(),
 };
