@@ -23,7 +23,7 @@ export const MainLayout = ({ children }) => {
       <Box sx={{ gridArea: "header" }}>
         <Header></Header>
       </Box>
-      <Box sx={{ gridArea: "content", px: f_px1 }}>content</Box>
+      <Box sx={{ gridArea: "content", px: f_px1 }}>{children}</Box>
       <Box sx={{ gridArea: "footer" }}>
         <AppFooter></AppFooter>
       </Box>
