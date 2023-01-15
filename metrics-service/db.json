@@ -1,16 +1,28 @@
 {
   "metrics": [
     {
-      "id": "0f8ea137-f89a-4d48-9b56-47949943a5b6",
-      "name": "hoa",
-      "value": "bar",
-      "timestamp": 1673701113938
+      "id": "fd3aba6d-42ed-4a71-bf84-68bc5180d230",
+      "name": "modal",
+      "value": "8",
+      "timestamp": "2022-12-31T00:54:06.230Z"
     },
     {
-      "id": "4a685095-f02c-4127-8e64-5f6f928fb7ab",
-      "name": "uu",
-      "value": "ii",
-      "timestamp": 1673708333442
+      "id": "fd3aba6d-42ed-4a71-bf84-68bc5180d222",
+      "name": "modal",
+      "value": "2",
+      "timestamp": "2023-01-15T00:54:06.230Z"
+    },
+    {
+      "id": "fd3aba6d-42ed-4a71-bf84-68bc5180d231",
+      "name": "button",
+      "value": "1",
+      "timestamp": "2023-01-15T00:54:06.230Z"
+    },
+    {
+      "id": "ff131677-f911-47a3-882b-dbf722ded0d8",
+      "name": "button",
+      "value": "44",
+      "timestamp": "2023-01-15T00:59:59.698Z"
     }
   ]
 }

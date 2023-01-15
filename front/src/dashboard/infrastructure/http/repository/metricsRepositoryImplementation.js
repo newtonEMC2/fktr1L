@@ -21,4 +21,12 @@ export const MetricsRepositoryImplementation = {
       .then((res) => res.json())
       .catch();
   },
+
+  fetchMetricsByDate: ({ gte_date }) => {
+    return get({
+      url: `http://localhost:3001/metrics?timestamp_gte=${gte_date}`,
+    })
+      .then((res) => res.json())
+      .catch();
+  },
 };
