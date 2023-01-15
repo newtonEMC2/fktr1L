@@ -2,10 +2,11 @@ import { MetricsRepository } from "../domain/metric/metric.repository";
 import { dateRepository } from "../domain/metric/objectValues/date/date.service";
 
 const average = ({ metrics }) => {
-  return (
+  if (metrics.length === 0) return 0;
+  const average =
     metrics.reduce((acc, current) => acc + parseFloat(current.value), 0) /
-    metrics.length
-  );
+    metrics.length;
+  return average;
 };
 
 export const getAverageMetricsUseCase = async () => {
@@ -22,8 +23,8 @@ export const getAverageMetricsUseCase = async () => {
       }),
     ]);
   return {
-    lastMinuteMetricsAverage: average({ metrics: lastMinuteMetrics }) || "none",
-    lastHourMetricsAverage: average({ metrics: lastHourMetrics }) || "none",
-    lastDayMetricsAverage: average({ metrics: lastDayMetrics }) || "none",
+    lastMinuteMetricsAverage: average({ metrics: lastMinuteMetrics }),
+    lastHourMetricsAverage: average({ metrics: lastHourMetrics }),
+    lastDayMetricsAverage: average({ metrics: lastDayMetrics }),
   };
 };
