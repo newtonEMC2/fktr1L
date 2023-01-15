@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MainLayout } from "../components/layout/mainLayout/mainLayout.component";
 import { useForm, Controller } from "react-hook-form";
 import { Box } from "@mui/system";
@@ -25,7 +25,7 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { MetricsRepository } from "../../../domain/metric/metric.repository";
 import { TwoPanelLayout } from "../components/layout/mainLayout/twoPanelLayout.component";
 import { dateRepository } from "../../../domain/metric/objectValues/date/date.service";
-import { getAverageMetricsUseCase } from "../../../application/getAverageMetrics.usecase";
+import { useMetricsViewModel } from "../../viewModel/useMetrics.viewmodel";
 
 const MetricsAverageTable = ({ metricsAverage }) => {
   return (
@@ -129,15 +129,7 @@ const MetricsTimeline = ({ data = [] }) => {
 };
 
 export const DashboardView = () => {
-  const initialMetricsAverageObject = {
-    lastMinuteMetricsAverage: 0,
-    lastHourMetricsAverage: 0,
-    lastDayMetricsAverage: 0,
-  };
-  const [metricsAverage, setMetricsAverage] = useState(
-    initialMetricsAverageObject
-  );
-  const [metrics, setMetrics] = useState([]);
+  const { metrics, metricsAverage, setMetrics } = useMetricsViewModel();
 
   const handleSubmit = (data) => {
     MetricsRepository.saveMetric({ data })
@@ -146,18 +138,6 @@ export const DashboardView = () => {
       )
       .catch();
   };
-
-  useEffect(() => {
-    getAverageMetricsUseCase().then((metricsAverageFromServer) =>
-      setMetricsAverage(metricsAverageFromServer || initialMetricsAverageObject)
-    );
-  }, [metrics.length]);
-
-  useEffect(() => {
-    MetricsRepository.fetchMetrics().then((metrics) =>
-      setMetrics(metrics || [])
-    );
-  }, []);
 
   return (
     <MainLayout>
