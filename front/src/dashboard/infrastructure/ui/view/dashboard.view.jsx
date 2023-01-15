@@ -27,22 +27,7 @@ import { TwoPanelLayout } from "../components/layout/mainLayout/twoPanelLayout.c
 import { dateRepository } from "../../../domain/metric/objectValues/date/date.service";
 import { getAverageMetricsUseCase } from "../../../application/getAverageMetrics.usecase";
 
-const MetricsAverageTable = () => {
-  const initialMetricsAverageObject = {
-    lastMinuteMetricsAverage: 0,
-    lastHourMetricsAverage: 0,
-    lastDayMetricsAverage: 0,
-  };
-  const [metricsAverage, setMetricsAverage] = useState(
-    initialMetricsAverageObject
-  );
-
-  useEffect(() => {
-    getAverageMetricsUseCase().then((metricsAverageFromServer) =>
-      setMetricsAverage(metricsAverageFromServer || initialMetricsAverageObject)
-    );
-  }, []);
-
+const MetricsAverageTable = ({ metricsAverage }) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -144,6 +129,14 @@ const MetricsTimeline = ({ data = [] }) => {
 };
 
 export const DashboardView = () => {
+  const initialMetricsAverageObject = {
+    lastMinuteMetricsAverage: 0,
+    lastHourMetricsAverage: 0,
+    lastDayMetricsAverage: 0,
+  };
+  const [metricsAverage, setMetricsAverage] = useState(
+    initialMetricsAverageObject
+  );
   const [metrics, setMetrics] = useState([]);
 
   const handleSubmit = (data) => {
@@ -153,6 +146,12 @@ export const DashboardView = () => {
       )
       .catch();
   };
+
+  useEffect(() => {
+    getAverageMetricsUseCase().then((metricsAverageFromServer) =>
+      setMetricsAverage(metricsAverageFromServer || initialMetricsAverageObject)
+    );
+  }, [metrics.length]);
 
   useEffect(() => {
     MetricsRepository.fetchMetrics().then((metrics) =>
@@ -168,7 +167,9 @@ export const DashboardView = () => {
             <Form onSubmit={handleSubmit}></Form>
             <Divider sx={{ my: "3rem" }}></Divider>
             <Typography variant="h6">Metrics Average</Typography>
-            <MetricsAverageTable></MetricsAverageTable>
+            <MetricsAverageTable
+              metricsAverage={metricsAverage}
+            ></MetricsAverageTable>
           </>
         }
         rightContent={<MetricsTimeline data={metrics}></MetricsTimeline>}
