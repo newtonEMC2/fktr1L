@@ -68,7 +68,6 @@ const Form = ({ onSubmit }) => {
     <form style={{ color: "blue" }} onSubmit={handleSubmit(onSubmit)}>
       <Box
         sx={{
-          maxWidth: "500px",
           width: "100%",
           display: "flex",
           flexDirection: "column",
