@@ -30,7 +30,7 @@ import { useMetricsViewModel } from "../../viewModel/useMetrics.viewmodel";
 const MetricsAverageTable = ({ metricsAverage }) => {
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="simple table">
+      <Table aria-label="metrics average table">
         <TableHead>
           <TableRow>
             <TableCell align="center">last minute</TableCell>
@@ -107,7 +107,7 @@ const Form = ({ onSubmit }) => {
 
 const MetricsTimeline = ({ data = [] }) => {
   return (
-    <Timeline>
+    <Timeline area-label="timeline">
       {data.map((metric, i, array) => (
         <TimelineItem key={metric.id}>
           <TimelineOppositeContent color="text.secondary">
